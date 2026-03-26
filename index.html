@@ -99,8 +99,9 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#services" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Services</a>
-                    <a href="#employers" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">For Employers</a>
-                    <a href="#candidates" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">For Candidates</a>
+                    <a href="#employers" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Employers</a>
+                    <a href="#candidates" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Candidates</a>
+                    <a href="#jobs" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">Open Jobs</a>
                     <a href="#testimonials" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Testimonials</a>
                     <a href="#contact" class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Get Started</a>
                 </div>
@@ -120,6 +121,7 @@
                 <a href="#services" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Services</a>
                 <a href="#employers" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">For Employers</a>
                 <a href="#candidates" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">For Candidates</a>
+                <a href="#jobs" class="block px-3 py-3 rounded-md text-base font-medium text-brand-600 hover:text-brand-700 hover:bg-slate-50">Open Jobs</a>
                 <a href="#contact" class="block px-3 py-3 mt-4 text-center rounded-lg text-base font-medium bg-brand-600 text-white hover:bg-brand-700">Get Started</a>
             </div>
         </div>
@@ -153,7 +155,7 @@
                         <a href="#employers" class="bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-brand-500/30 transform hover:-translate-y-1 flex items-center justify-center gap-2">
                             Hire Talent <i class="ph-bold ph-arrow-right"></i>
                         </a>
-                        <a href="#candidates" class="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2">
+                        <a href="#jobs" class="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2">
                             Find a Job <i class="ph-bold ph-magnifying-glass"></i>
                         </a>
                     </div>
@@ -348,8 +350,8 @@
                         </li>
                     </ul>
                     
-                    <a href="#contact" class="inline-flex items-center gap-2 text-accent-600 font-bold hover:text-accent-700 transition-colors group">
-                        Submit Your Resume <i class="ph-bold ph-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    <a href="#jobs" class="inline-flex items-center gap-2 text-accent-600 font-bold hover:text-accent-700 transition-colors group">
+                        Browse Open Jobs <i class="ph-bold ph-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
@@ -357,8 +359,30 @@
         </div>
     </section>
 
+    <!-- Dynamic Jobs Section -->
+    <section id="jobs" class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-medium text-sm mb-4 border border-brand-100">We're Hiring</div>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">Featured Opportunities</h2>
+                <p class="text-lg text-slate-600">Find your next great role with one of our visionary partners.</p>
+            </div>
+
+            <!-- This container will be populated by JavaScript -->
+            <div id="job-board-container" class="space-y-4">
+                <!-- Job cards inject here -->
+            </div>
+            
+            <div class="mt-10 text-center animate-on-scroll delay-200">
+                <button class="text-brand-600 font-medium hover:text-brand-700 transition-colors flex items-center gap-2 mx-auto">
+                    View All Opportunities <i class="ph-bold ph-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials -->
-    <section id="testimonials" class="py-24 bg-white overflow-hidden">
+    <section id="testimonials" class="py-24 bg-slate-50 border-t border-slate-200 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
                 <h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">Success Stories</h2>
@@ -367,7 +391,7 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll">
                     <i class="ph-fill ph-quotes text-5xl text-brand-200 absolute top-6 right-6"></i>
                     <div class="flex items-center gap-1 text-yellow-400 mb-4">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
@@ -383,7 +407,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-100">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-100">
                     <i class="ph-fill ph-quotes text-5xl text-accent-200 absolute top-6 right-6"></i>
                     <div class="flex items-center gap-1 text-yellow-400 mb-4">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
@@ -399,7 +423,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-200 md:hidden lg:block">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-200 md:hidden lg:block">
                     <i class="ph-fill ph-quotes text-5xl text-brand-200 absolute top-6 right-6"></i>
                     <div class="flex items-center gap-1 text-yellow-400 mb-4">
                         <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
@@ -418,7 +442,7 @@
     </section>
 
     <!-- CTA / Contact Section -->
-    <section id="contact" class="py-20 relative">
+    <section id="contact" class="py-20 relative bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="bg-gradient-to-br from-brand-900 to-slate-900 rounded-3xl p-8 md:p-16 shadow-2xl overflow-hidden relative animate-on-scroll">
                 <!-- Background decorative rings -->
@@ -535,6 +559,79 @@
             }
         });
 
+        // --- Dynamic Jobs Logic ---
+        // Since static sites can't read files from a directory dynamically using client-side JS,
+        // we use this array as our "database". Simply add/remove items here to update the website!
+        const openJobs = [
+            {
+                title: "Senior Frontend Engineer",
+                company: "TechNova",
+                location: "Remote",
+                type: "Full-time",
+                salary: "$120k - $160k",
+                link: "#"
+            },
+            {
+                title: "Product Marketing Manager",
+                company: "GrowthCorp",
+                location: "New York, NY",
+                type: "Full-time",
+                salary: "$100k - $130k",
+                link: "#"
+            },
+            {
+                title: "Lead UX Designer",
+                company: "InnovateInc",
+                location: "London, UK / Hybrid",
+                type: "Contract",
+                salary: "£450/day",
+                link: "#"
+            },
+            {
+                title: "Backend Developer (Go)",
+                company: "StartupX",
+                location: "San Francisco, CA",
+                type: "Full-time",
+                salary: "$140k - $180k",
+                link: "#"
+            }
+        ];
+
+        const jobContainer = document.getElementById('job-board-container');
+
+        // Function to render jobs
+        function renderJobs() {
+            if (!jobContainer) return;
+            
+            jobContainer.innerHTML = openJobs.map((job, index) => `
+                <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:shadow-md hover:border-brand-300 transition-all animate-on-scroll delay-${(index % 3) * 100}">
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">${job.title}</h3>
+                        <div class="flex flex-wrap gap-4 text-sm text-slate-500 font-medium">
+                            <span class="flex items-center gap-1.5 text-slate-700">
+                                <i class="ph-fill ph-buildings text-brand-500 text-lg"></i> ${job.company}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-map-pin text-slate-400 text-lg"></i> ${job.location}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-briefcase text-slate-400 text-lg"></i> ${job.type}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-currency-circle-dollar text-slate-400 text-lg"></i> ${job.salary}
+                            </span>
+                        </div>
+                    </div>
+                    <a href="${job.link}" class="w-full md:w-auto text-center bg-white border-2 border-slate-100 hover:border-brand-500 hover:text-brand-600 text-slate-700 px-6 py-2.5 rounded-lg font-semibold transition-colors whitespace-nowrap">
+                        Apply Now
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Initialize jobs
+        renderJobs();
+
         // Intersection Observer for Scroll Animations
         const observerOptions = {
             root: null,
@@ -552,6 +649,7 @@
             });
         }, observerOptions);
 
+        // Re-query elements to include the newly injected job cards
         document.querySelectorAll('.animate-on-scroll').forEach((elem) => {
             observer.observe(elem);
         });
