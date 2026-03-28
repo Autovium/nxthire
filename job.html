@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | Nexthire Solutions</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Custom Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf',
+                            500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e',
+                        },
+                        accent: { 500: '#3b82f6', 600: '#2563eb', }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Phosphor Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="font-sans text-slate-600 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+    <!-- Navbar Minimal -->
+    <nav class="w-full bg-white border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-600 flex items-center justify-center text-white shadow-lg">
+                        <i class="ph-bold ph-buildings text-2xl"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl text-slate-900 tracking-tight">Nexthire<span class="text-brand-600">.</span></span>
+                </a>
+                <a href="index.html#jobs" class="text-slate-600 hover:text-brand-600 font-medium flex items-center gap-2 transition-colors">
+                    <i class="ph-bold ph-arrow-left"></i> Back to Jobs
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
+        
+        <!-- Loading State -->
+        <div id="loading-state" class="text-center py-20">
+            <i class="ph-bold ph-spinner animate-spin text-4xl text-brand-500 mb-4"></i>
+            <p class="text-slate-500">Loading job details...</p>
+        </div>
+
+        <!-- Job Not Found -->
+        <div id="error-state" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm">
+            <i class="ph-duotone ph-warning-circle text-6xl text-slate-300 mb-4"></i>
+            <h2 class="font-display text-2xl font-bold text-slate-900 mb-2">Job Not Found</h2>
+            <p class="text-slate-500 mb-6">The job you are looking for does not exist or has been removed.</p>
+            <a href="index.html#jobs" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-6 py-3 rounded-full font-medium transition-all">
+                Browse Available Jobs
+            </a>
+        </div>
+
+        <!-- Job Details Container -->
+        <div id="job-details" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            
+            <!-- Job Advertisement Image -->
+            <div class="w-full h-[300px] sm:h-[400px] md:h-[500px] relative bg-slate-100">
+                <img id="job-image" src="" alt="Job Advertisement" class="w-full h-full object-cover">
+                <!-- Overlay gradient for text readability -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent flex flex-col justify-end p-8 md:p-12">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-medium text-sm mb-4 w-max border border-white/30">
+                        <span id="job-company">Company Name</span>
+                    </div>
+                    <h1 id="job-title" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">Job Title</h1>
+                </div>
+            </div>
+
+            <!-- Job Info Bar -->
+            <div class="border-b border-slate-100 bg-slate-50/50">
+                <div class="flex flex-wrap items-center gap-y-4 gap-x-8 p-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+                            <i class="ph-fill ph-map-pin text-brand-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Location</p>
+                            <p id="job-location" class="font-medium text-slate-900">Location</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+                            <i class="ph-fill ph-briefcase text-brand-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Job Type</p>
+                            <p id="job-type" class="font-medium text-slate-900">Type</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+                            <i class="ph-fill ph-currency-circle-dollar text-brand-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Salary Range</p>
+                            <p id="job-salary" class="font-medium text-slate-900">Salary</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apply Section CTA -->
+            <div class="p-8 md:p-12 text-center bg-white">
+                <h3 class="font-display text-2xl font-bold text-slate-900 mb-4">Ready to take the next step?</h3>
+                <p class="text-slate-600 mb-8 max-w-2xl mx-auto">Click the button below to be redirected to our secure application form. Remember, our services are completely free for candidates!</p>
+                
+                <a id="apply-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-10 py-5 rounded-full font-bold text-xl transition-all shadow-xl shadow-brand-500/30 transform hover:-translate-y-1 w-full sm:w-auto">
+                    Apply for this Position <i class="ph-bold ph-arrow-square-out"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm">© <span id="year"></span> Nexthire Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // **IMPORTANT:** Keep this array identical to the one in index.html!
+        // When you add a job in index.html, make sure to copy it here too.
+        const openJobs = [
+            {
+                id: "senior-frontend-engineer",
+                title: "Senior Frontend Engineer",
+                company: "TechNova",
+                location: "Remote",
+                type: "Full-time",
+                salary: "$120k - $160k",
+                image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                applyLink: "https://docs.google.com/forms/your-google-form-link-1" 
+            },
+            {
+                id: "product-marketing-manager",
+                title: "Product Marketing Manager",
+                company: "GrowthCorp",
+                location: "New York, NY",
+                type: "Full-time",
+                salary: "$100k - $130k",
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                applyLink: "https://docs.google.com/forms/your-google-form-link-2"
+            },
+            {
+                id: "lead-ux-designer",
+                title: "Lead UX Designer",
+                company: "InnovateInc",
+                location: "London, UK / Hybrid",
+                type: "Contract",
+                salary: "£450/day",
+                image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                applyLink: "https://docs.google.com/forms/your-google-form-link-3"
+            },
+            {
+                id: "backend-developer-go",
+                title: "Backend Developer (Go)",
+                company: "StartupX",
+                location: "San Francisco, CA",
+                type: "Full-time",
+                salary: "$140k - $180k",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                applyLink: "https://docs.google.com/forms/your-google-form-link-4"
+            }
+        ];
+
+        // Fetch URL parameters to determine which job to show
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get('id');
+        
+        // Find the job in our database array
+        const job = openJobs.find(j => j.id === jobId);
+
+        // Hide loading state
+        document.getElementById('loading-state').classList.add('hidden');
+
+        if (job) {
+            // Populate the UI with job data
+            document.title = `${job.title} | Nexthire Solutions`;
+            document.getElementById('job-title').textContent = job.title;
+            document.getElementById('job-company').textContent = job.company;
+            document.getElementById('job-location').textContent = job.location;
+            document.getElementById('job-type').textContent = job.type;
+            document.getElementById('job-salary').textContent = job.salary;
+            document.getElementById('job-image').src = job.image;
+            document.getElementById('job-image').alt = `${job.title} Advertisement`;
+            
+            // Set the Google Form apply link
+            document.getElementById('apply-btn').href = job.applyLink;
+
+            // Show the filled container
+            document.getElementById('job-details').classList.remove('hidden');
+        } else {
+            // Show error if job ID doesn't exist
+            document.getElementById('error-state').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
