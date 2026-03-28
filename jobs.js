@@ -8,5 +8,15 @@ const openJobs = [
         image: "Ads/2443d478-cce3-4a46-8d40-34df4f902e01.jpg",
         applyLink: "https://forms.gle/xABZEBgo61nQtYhv8",
         id: "job_20260328_233508"
+    },
+    {
+        title: "HR Manager",
+        company: "NextHire Solutions",
+        location: "Yala",
+        type: "Part Time",
+        salary: "0-500",
+        image: "Ads/senior-frontend-engineer.jpg",
+        applyLink: "https://forms.gle/xABZEBgo61nQtYhv8",
+        id: "job_20260328_234040"
     }
 ];
