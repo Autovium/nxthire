@@ -8,6 +8,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="jobs.js"></script>
+    <script src="testimonials.js"></script>
     
     <!-- Tailwind Config for Custom Brand Colors -->
     <script>
@@ -398,7 +399,7 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Dynamic Testimonials Section -->
     <section id="testimonials" class="py-24 bg-slate-50 border-t border-slate-200 overflow-hidden scroll-mt-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
@@ -406,54 +407,9 @@
                 <p class="text-lg text-slate-600">Don't just take our word for it. Hear from the people and companies we've helped grow.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll">
-                    <i class="ph-fill ph-quotes text-5xl text-brand-200 absolute top-6 right-6"></i>
-                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
-                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                    </div>
-                    <p class="text-slate-700 mb-6 italic">"Nexthire completely transformed our engineering department. They understood our technical requirements and culture instantly, bringing us candidates we couldn't find anywhere else."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-slate-900">David Chen</h4>
-                            <p class="text-sm text-slate-500">CTO, TechNova</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-100">
-                    <i class="ph-fill ph-quotes text-5xl text-accent-200 absolute top-6 right-6"></i>
-                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
-                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                    </div>
-                    <p class="text-slate-700 mb-6 italic">"I was struggling to find a role that matched my seniority. The team at Nexthire coached me, revamped my profile, and landed me a Director role within three weeks."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-slate-900">Elena Rodriguez</h4>
-                            <p class="text-sm text-slate-500">Director of Marketing</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-200 md:hidden lg:block">
-                    <i class="ph-fill ph-quotes text-5xl text-brand-200 absolute top-6 right-6"></i>
-                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
-                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                    </div>
-                    <p class="text-slate-700 mb-6 italic">"The fastest and most professional hiring experience we've ever had. We needed to scale our sales team rapidly, and Nexthire delivered high-performers ahead of schedule."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-slate-900">Marcus Johnson</h4>
-                            <p class="text-sm text-slate-500">VP of Sales, GrowthCorp</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- This container will be populated by JavaScript -->
+            <div id="testimonials-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial cards inject here -->
             </div>
         </div>
     </section>
@@ -544,9 +500,6 @@
         </div>
     </footer>
 
-    <!-- SHARED JOB DATA (REQUIRED FOR THE PAGE TO LOAD) -->
-    <script src="jobs.js"></script>
-
     <!-- Interactive Scripts -->
     <script>
         // Set current year in footer
@@ -621,9 +574,49 @@
             `).join('');
         }
 
-        // Initialize jobs
-        renderJobs();
+        // --- Dynamic Testimonials Logic ---
+        const testimonialsContainer = document.getElementById('testimonials-container');
 
+        // Function to render testimonials
+        function renderTestimonials() {
+            if (!testimonialsContainer) return;
+
+            // Fallback check
+            if (typeof testimonialsData === 'undefined') {
+                testimonialsContainer.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 bg-white rounded-2xl border border-slate-200 shadow-sm"><i class="ph-duotone ph-warning-circle text-4xl mb-3 text-slate-300"></i><p>Unable to load testimonials. Please ensure testimonials.js is present.</p></div>';
+                return;
+            }
+
+            testimonialsContainer.innerHTML = testimonialsData.map((t, index) => {
+                // To keep the layout identical to the original hardcoded version:
+                // We alternate quote icon colors, and hide the 3rd card on medium screens
+                const quoteColor = index % 2 !== 0 ? 'text-accent-200' : 'text-brand-200';
+                const visibilityClass = index === 2 ? 'md:hidden lg:block' : '';
+                
+                return `
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative animate-on-scroll delay-${(index % 3) * 100} ${visibilityClass}">
+                    <i class="ph-fill ph-quotes text-5xl ${quoteColor} absolute top-6 right-6"></i>
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-slate-700 mb-6 italic">"${t.quote}"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="${t.image}" alt="${t.name}" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-slate-900">${t.name}</h4>
+                            <p class="text-sm text-slate-500">${t.role}</p>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Initialize dynamic sections
+        renderJobs();
+        renderTestimonials();
+
+        // --- Scroll Animations Logic ---
         // Intersection Observer for Scroll Animations
         const observerOptions = {
             root: null,
@@ -641,7 +634,7 @@
             });
         }, observerOptions);
 
-        // Re-query elements to include the newly injected job cards
+        // Re-query elements to include the newly injected job AND testimonial cards
         document.querySelectorAll('.animate-on-scroll').forEach((elem) => {
             observer.observe(elem);
         });
