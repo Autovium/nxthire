@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Details | Nexthire Solutions</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script src="jobs.js"></script>
     
-    <!-- Tailwind Config for Custom Brand Colors -->
     <script>
         tailwind.config = {
             theme: {
@@ -21,23 +19,17 @@
                             500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e',
                         },
                         accent: { 500: '#3b82f6', 600: '#2563eb', }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Google Fonts & Phosphor Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body class="font-sans text-slate-600 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-    <!-- Navbar Minimal -->
     <nav class="w-full bg-white border-b border-slate-200">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -54,16 +46,13 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
         
-        <!-- Loading State -->
         <div id="loading-state" class="text-center py-20">
             <i class="ph-bold ph-spinner animate-spin text-4xl text-brand-500 mb-4"></i>
             <p class="text-slate-500">Loading job details...</p>
         </div>
 
-        <!-- Job Not Found -->
         <div id="error-state" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm">
             <i class="ph-duotone ph-warning-circle text-6xl text-slate-300 mb-4"></i>
             <h2 class="font-display text-2xl font-bold text-slate-900 mb-2">Job Not Found</h2>
@@ -73,24 +62,21 @@
             </a>
         </div>
 
-        <!-- Job Details Container -->
         <div id="job-details" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
             
-            <!-- Job Advertisement Image -->
-            <div class="w-full h-[300px] sm:h-[400px] md:h-[500px] relative bg-slate-100">
-                <img id="job-image" src="" alt="Job Advertisement" class="w-full h-full object-cover">
-                <!-- Overlay gradient for text readability -->
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent flex flex-col justify-end p-8 md:p-12">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-medium text-sm mb-4 w-max border border-white/30">
-                        <span id="job-company">Company Name</span>
-                    </div>
-                    <h1 id="job-title" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">Job Title</h1>
-                </div>
-            </div>
+            
 
-            <!-- Job Info Bar -->
-            <div class="border-b border-slate-100 bg-slate-50/50">
-                <div class="flex flex-wrap items-center gap-y-4 gap-x-8 p-8">
+            <div class="p-8 md:p-12 pb-4 md:pb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 font-medium text-sm mb-4 w-max border border-brand-100">
+                    <span id="job-company">Company Name</span>
+                </div>
+                <h1 id="job-title" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight">Job Title</h1>
+            </div>
+            <div class="w-full bg-slate-100 border-b border-slate-200 flex justify-center p-4 sm:p-8">
+                <img id="job-image" src="" alt="Job Advertisement" class="max-w-full h-auto max-h-[800px] object-contain rounded-xl shadow-sm">
+            </div>
+            <div class="border-y border-slate-100 bg-slate-50/50">
+                <div class="flex flex-wrap items-center gap-y-4 gap-x-8 p-8 md:px-12">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
                             <i class="ph-fill ph-map-pin text-brand-500 text-xl"></i>
@@ -123,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Apply Section CTA -->
             <div class="p-8 md:p-12 text-center bg-white">
                 <h3 class="font-display text-2xl font-bold text-slate-900 mb-4">Ready to take the next step?</h3>
                 <p class="text-slate-600 mb-8 max-w-2xl mx-auto">Click the button below to be redirected to our secure application form. Remember, our services are completely free for candidates!</p>
@@ -136,7 +121,6 @@
         </div>
     </main>
 
-    <!-- Simple Footer -->
     <footer class="bg-white border-t border-slate-200 py-8 mt-auto">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-slate-500 text-sm">© <span id="year"></span> Nexthire Solutions. All rights reserved.</p>
@@ -146,7 +130,9 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-
+        // **IMPORTANT:** Keep this array identical to the one in index.html!
+        // When you add a job in index.html, make sure to copy it here too.
+        
         // Fetch URL parameters to determine which job to show
         const urlParams = new URLSearchParams(window.location.search);
         const jobId = urlParams.get('id');
