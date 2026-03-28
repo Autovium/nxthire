@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Opportunities | Nexthire Solutions</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- SHARED JOB DATA -->
+    <script src="jobs.js"></script>
+    
+    <!-- Tailwind Config for Custom Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf',
+                            500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e',
+                        },
+                        accent: { 500: '#3b82f6', 600: '#2563eb', }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Phosphor Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Custom Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="font-sans text-slate-600 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-slate-200" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
+                        <i class="ph-bold ph-buildings text-2xl"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl text-slate-900 tracking-tight">Nexthire<span class="text-brand-600">.</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html#services" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Services</a>
+                    <a href="index.html#employers" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Employers</a>
+                    <a href="index.html#candidates" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Candidates</a>
+                    <a href="#" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">All Jobs</a>
+                    <a href="index.html#contact" class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="index.html#services" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Services</a>
+                <a href="index.html#employers" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">For Employers</a>
+                <a href="index.html#candidates" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">For Candidates</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-brand-600 hover:text-brand-700 hover:bg-slate-50">All Jobs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="pt-32 pb-12 bg-white border-b border-slate-100 mt-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-medium text-sm mb-4 border border-brand-100">Career Board</div>
+            <h1 class="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-4">All Open Opportunities</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Browse our complete list of available roles and find your perfect fit today.</p>
+        </div>
+    </header>
+
+    <!-- Jobs List Section -->
+    <main class="flex-grow py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Job List Container -->
+            <div id="all-jobs-container" class="space-y-4">
+                <!-- Javascript will inject job cards here -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm">© <span id="year"></span> Nexthire Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('py-2');
+            }
+        });
+
+        // --- Dynamic Jobs Logic ---
+        const jobContainer = document.getElementById('all-jobs-container');
+
+        function renderAllJobs() {
+            if (!jobContainer) return;
+            
+            // Fallback check
+            if (typeof openJobs === 'undefined') {
+                jobContainer.innerHTML = '<div class="text-center py-12 text-slate-500 bg-white rounded-2xl border border-slate-200 shadow-sm"><i class="ph-duotone ph-warning-circle text-4xl mb-3 text-slate-300"></i><p>Unable to load job listings. Please ensure jobs.js is present.</p></div>';
+                return;
+            }
+
+            // Check if there are no jobs
+            if (openJobs.length === 0) {
+                jobContainer.innerHTML = '<div class="text-center py-12 text-slate-500 bg-white rounded-2xl border border-slate-200 shadow-sm"><i class="ph-duotone ph-briefcase text-4xl mb-3 text-slate-300"></i><p>There are no open opportunities at the moment. Please check back later!</p></div>';
+                return;
+            }
+            
+            // Map all jobs to HTML
+            jobContainer.innerHTML = openJobs.map((job, index) => `
+                <div class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:shadow-md hover:border-brand-300 transition-all animate-on-scroll delay-${(index % 3) * 100}">
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">${job.title}</h3>
+                        <div class="flex flex-wrap gap-4 text-sm text-slate-500 font-medium">
+                            <span class="flex items-center gap-1.5 text-slate-700">
+                                <i class="ph-fill ph-buildings text-brand-500 text-lg"></i> ${job.company}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-map-pin text-slate-400 text-lg"></i> ${job.location}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-briefcase text-slate-400 text-lg"></i> ${job.type}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="ph-fill ph-currency-circle-dollar text-slate-400 text-lg"></i> ${job.salary}
+                            </span>
+                        </div>
+                    </div>
+                    <a href="job.html?id=${job.id}" class="w-full md:w-auto text-center bg-white border-2 border-slate-100 hover:border-brand-500 hover:text-brand-600 text-slate-700 px-6 py-2.5 rounded-lg font-semibold transition-colors whitespace-nowrap block md:inline-block">
+                        View Details
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Initialize jobs
+        renderAllJobs();
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach((elem) => {
+            observer.observe(elem);
+        });
+    </script>
+</body>
+</html>
